@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guruji Jan Sewa Kendra & Book Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi&family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root {
+    --saffron: #FF6F00;
+    --saffron-light: #FFF3E0;
+    --saffron-dark: #E65100;
+    --green: #2E7D32;
+    --green-light: #E8F5E9;
+    --green-dark: #1B5E20;
+    --white: #FFFFFF;
+    --off-white: #FAFAF7;
+    --cream: #FFF8F0;
+    --text-dark: #1A1A1A;
+    --text-mid: #4A4A4A;
+    --text-light: #888;
+    --border: #E8E0D5;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 32px rgba(0,0,0,0.14);
+    --radius: 12px;
+    --radius-lg: 20px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--off-white);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-bar {
+    background: var(--green);
+    color: white;
+    font-size: 13px;
+    padding: 7px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-inner {
+    display: inline-block;
+    animation: marquee 28s linear infinite;
+  }
+  .marquee-inner span { margin: 0 40px; }
+  .marquee-inner i { margin-right: 6px; color: #A5D6A7; }
+  @keyframes marquee { 0%{transform:translateX(100vw)} 100%{transform:translateX(-100%)} }
+
+  /* ── NAVBAR ── */
+  nav {
+    background: white;
+    border-bottom: 3px solid var(--saffron);
+    position: sticky; top: 0; z-index: 1000;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 24px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo-icon {
+    width: 50px; height: 50px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--saffron), var(--saffron-dark));
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 22px; flex-shrink: 0;
+  }
+  .nav-logo-text { line-height: 1.2; }
+  .nav-logo-text .name { font-size: 15px; font-weight: 700; color: var(--saffron-dark); }
+  .nav-logo-text .sub { font-size: 11px; color: var(--green); font-weight: 500; }
+  .nav-links { display: flex; gap: 6px; list-style: none; align-items: center; }
+  .nav-links a {
+    text-decoration: none; color: var(--text-mid);
+    font-size: 13.5px; font-weight: 500;
+    padding: 7px 14px; border-radius: 8px;
+    transition: all 0.2s;
+  }
+  .nav-links a:hover { background: var(--saffron-light); color: var(--saffron-dark); }
+  .nav-links .nav-cta {
+    background: var(--saffron); color: white !important;
+    padding: 8px 18px; border-radius: 8px;
+    font-weight: 600;
+  }
+  .nav-links .nav-cta:hover { background: var(--saffron-dark) !important; }
+
+  .hamburger { display: none; background: none; border: none; cursor: pointer; font-size: 22px; color: var(--text-dark); }
+  .mobile-menu { display: none; background: white; padding: 12px 24px 18px; border-top: 1px solid var(--border); }
+  .mobile-menu.open { display: block; }
+  .mobile-menu a { display: block; padding: 10px 0; font-size: 15px; color: var(--text-mid); text-decoration: none; border-bottom: 1px solid var(--border); font-weight: 500; }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #FFF3E0 0%, #FFF8F0 40%, #E8F5E9 100%);
+    padding: 70px 24px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FF6F00' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--green); color: white;
+    font-size: 12px; font-weight: 600;
+    padding: 5px 16px; border-radius: 999px;
+    margin-bottom: 20px; letter-spacing: 0.05em;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 52px);
+    color: var(--text-dark);
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .hero h1 span { color: var(--saffron-dark); }
+  .hero-sub { font-size: 15px; color: var(--text-mid); margin-bottom: 10px; }
+  .hero-hindi { font-family: 'Tiro Devanagari Hindi', serif; font-size: 17px; color: var(--green-dark); margin-bottom: 30px; }
+  .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 24px; border-radius: 10px;
+    font-size: 14px; font-weight: 600;
+    text-decoration: none; cursor: pointer;
+    border: none; transition: all 0.2s;
+  }
+  .btn-primary { background: var(--saffron); color: white; }
+  .btn-primary:hover { background: var(--saffron-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,111,0,0.3); }
+  .btn-secondary { background: var(--green); color: white; }
+  .btn-secondary:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(46,125,50,0.3); }
+  .btn-outline { background: white; color: var(--saffron-dark); border: 2px solid var(--saffron); }
+  .btn-outline:hover { background: var(--saffron); color: white; }
+
+  .hero-stats {
+    display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
+    margin-top: 48px;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat .num { font-size: 28px; font-weight: 700; color: var(--saffron-dark); }
+  .hero-stat .lbl { font-size: 12px; color: var(--text-mid); margin-top: 2px; }
+
+  /* ── SECTIONS COMMON ── */
+  section { padding: 64px 24px; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .section-header { text-align: center; margin-bottom: 44px; }
+  .section-header .eyebrow {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--saffron); margin-bottom: 10px;
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 4vw, 36px);
+    color: var(--text-dark); margin-bottom: 12px;
+  }
+  .section-header p { font-size: 15px; color: var(--text-mid); max-width: 560px; margin: 0 auto; }
+  .section-divider { width: 60px; height: 4px; background: var(--saffron); border-radius: 2px; margin: 14px auto 0; }
+
+  /* ── JAN SEWA SERVICES ── */
+  #services { background: var(--cream); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .service-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 18px;
+    text-align: center;
+    transition: all 0.25s;
+    cursor: default;
+  }
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--saffron);
+  }
+  .service-icon {
+    width: 56px; height: 56px; border-radius: 14px;
+    background: var(--saffron-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; color: var(--saffron-dark);
+    margin: 0 auto 14px;
+  }
+  .service-card h3 { font-size: 14px; font-weight: 600; color: var(--text-dark); margin-bottom: 6px; }
+  .service-card p { font-size: 12px; color: var(--text-light); line-height: 1.5; }
+  .service-fee {
+    display: inline-block; margin-top: 10px;
+    background: var(--green-light); color: var(--green-dark);
+    font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 999px;
+  }
+
+  /* ── BOOK STORE ── */
+  #books { background: white; }
+  .book-cats {
+    display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .cat-btn {
+    padding: 8px 18px; border-radius: 999px;
+    border: 1.5px solid var(--border);
+    background: white; font-size: 13px; font-weight: 500;
+    cursor: pointer; transition: all 0.2s; color: var(--text-mid);
+  }
+  .cat-btn.active, .cat-btn:hover {
+    background: var(--saffron); color: white; border-color: var(--saffron);
+  }
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 18px;
+  }
+  .book-card {
+    background: var(--off-white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: all 0.25s;
+  }
+  .book-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  .book-cover {
+    height: 140px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 42px;
+    position: relative;
+  }
+  .book-badge {
+    position: absolute; top: 8px; right: 8px;
+    font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 999px;
+  }
+  .badge-new { background: var(--green); color: white; }
+  .badge-hot { background: var(--saffron); color: white; }
+  .book-info { padding: 12px; }
+  .book-info h4 { font-size: 13px; font-weight: 600; color: var(--text-dark); margin-bottom: 3px; line-height: 1.3; }
+  .book-info .author { font-size: 11px; color: var(--text-light); margin-bottom: 8px; }
+  .book-info .price { font-size: 14px; font-weight: 700; color: var(--saffron-dark); }
+  .book-info .avail { font-size: 11px; color: var(--green); font-weight: 500; }
+  .book-enquire {
+    width: 100%; margin-top: 8px;
+    padding: 7px; border-radius: 8px;
+    background: var(--green-light); color: var(--green-dark);
+    border: none; font-size: 12px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 5px;
+  }
+  .book-enquire:hover { background: var(--green); color: white; }
+
+  /* ── ABOUT ── */
+  #about { background: var(--cream); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .about-img-box {
+    background: linear-gradient(135deg, var(--saffron-light), var(--green-light));
+    border-radius: var(--radius-lg);
+    height: 360px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 100px; position: relative; overflow: hidden;
+  }
+  .about-img-box::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,111,0,0.08), rgba(46,125,50,0.08));
+  }
+  .about-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px; margin-bottom: 16px; color: var(--text-dark);
+  }
+  .about-content p { font-size: 14.5px; color: var(--text-mid); line-height: 1.8; margin-bottom: 14px; }
+  .about-hindi { font-family: 'Tiro Devanagari Hindi', serif; font-size: 15px; color: var(--green-dark); font-style: italic; }
+  .about-points { list-style: none; margin-top: 20px; }
+  .about-points li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 14px; color: var(--text-mid); margin-bottom: 10px;
+  }
+  .about-points li i { color: var(--saffron); margin-top: 2px; flex-shrink: 0; }
+
+  /* ── NOTICE BOARD ── */
+  #notice { background: white; }
+  .notice-board {
+    background: var(--cream);
+    border: 2px solid var(--saffron);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    max-width: 800px; margin: 0 auto;
+  }
+  .notice-header {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 18px; padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .notice-header i { font-size: 20px; color: var(--saffron); }
+  .notice-header h3 { font-size: 16px; font-weight: 700; color: var(--text-dark); }
+  .notice-item {
+    display: flex; gap: 14px; padding: 12px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .notice-item:last-child { border-bottom: none; }
+  .notice-date {
+    font-size: 11px; font-weight: 600; color: var(--saffron-dark);
+    background: var(--saffron-light); padding: 3px 8px;
+    border-radius: 6px; white-space: nowrap; height: fit-content;
+  }
+  .notice-text { font-size: 13.5px; color: var(--text-mid); line-height: 1.5; }
+  .notice-text strong { color: var(--text-dark); }
+
+  /* ── GALLERY ── */
+  #gallery { background: var(--cream); }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+  .gallery-item {
+    border-radius: var(--radius);
+    overflow: hidden;
+    aspect-ratio: 1;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 50px; cursor: pointer;
+    transition: transform 0.2s;
+    border: 1px solid var(--border);
+  }
+  .gallery-item:hover { transform: scale(1.03); }
+  .g1 { background: linear-gradient(135deg, #FFF3E0, #FFE0B2); }
+  .g2 { background: linear-gradient(135deg, #E8F5E9, #C8E6C9); }
+  .g3 { background: linear-gradient(135deg, #E3F2FD, #BBDEFB); }
+  .g4 { background: linear-gradient(135deg, #FCE4EC, #F8BBD0); }
+  .g5 { background: linear-gradient(135deg, #F3E5F5, #E1BEE7); }
+  .g6 { background: linear-gradient(135deg, #FFF8E1, #FFECB3); }
+
+  /* ── CONTACT ── */
+  #contact { background: white; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .contact-info h3 { font-size: 20px; font-weight: 700; margin-bottom: 20px; color: var(--text-dark); }
+  .contact-item {
+    display: flex; gap: 14px; margin-bottom: 18px; align-items: flex-start;
+  }
+  .contact-icon {
+    width: 42px; height: 42px; border-radius: 10px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px;
+  }
+  .contact-icon.saffron { background: var(--saffron-light); color: var(--saffron-dark); }
+  .contact-icon.green { background: var(--green-light); color: var(--green-dark); }
+  .contact-item-text .label { font-size: 11px; color: var(--text-light); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  .contact-item-text .val { font-size: 14px; color: var(--text-dark); font-weight: 500; margin-top: 2px; }
+  .contact-item-text a { color: var(--saffron-dark); text-decoration: none; }
+  .map-placeholder {
+    background: var(--green-light);
+    border-radius: var(--radius-lg);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    height: 280px; gap: 12px;
+    border: 1px solid var(--border);
+    color: var(--green-dark);
+    font-size: 14px; font-weight: 500;
+  }
+  .map-placeholder i { font-size: 40px; }
+  .hours-box {
+    background: var(--cream);
+    border-radius: var(--radius);
+    padding: 18px; margin-top: 20px;
+    border: 1px solid var(--border);
+  }
+  .hours-box h4 { font-size: 14px; font-weight: 700; margin-bottom: 10px; color: var(--text-dark); }
+  .hours-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-mid); padding: 5px 0; border-bottom: 1px dashed var(--border); }
+  .hours-row:last-child { border-bottom: none; }
+  .open { color: var(--green); font-weight: 600; }
+  .closed { color: #e53935; font-weight: 600; }
+  .whatsapp-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #25D366; color: white;
+    padding: 13px 24px; border-radius: 10px;
+    font-size: 14px; font-weight: 700;
+    text-decoration: none; margin-top: 20px;
+    transition: all 0.2s;
+  }
+  .whatsapp-btn:hover { background: #1da851; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,211,102,0.3); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #1A1A1A; color: #CCC;
+    padding: 48px 24px 24px;
+  }
+  .footer-grid {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px;
+    margin-bottom: 32px;
+  }
+  .footer-brand .name { font-size: 17px; font-weight: 700; color: white; margin-bottom: 6px; }
+  .footer-brand p { font-size: 13px; line-height: 1.7; }
+  .footer-col h4 { font-size: 13px; font-weight: 600; color: white; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 8px; }
+  .footer-col ul li a { font-size: 13px; color: #AAA; text-decoration: none; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--saffron); }
+  .footer-bottom {
+    max-width: 1200px; margin: 0 auto;
+    border-top: 1px solid #333;
+    padding-top: 20px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 10px; font-size: 12px;
+  }
+  .footer-flag { display: flex; gap: 6px; align-items: center; }
+  .flag-stripe { width: 20px; height: 6px; border-radius: 1px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: block; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    .hero-stats { gap: 24px; }
+    .about-img-box { height: 220px; font-size: 70px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MARQUEE -->
+<div class="marquee-bar">
+  <div class="marquee-inner">
+    <span><i class="fas fa-bullhorn"></i>Aadhaar update seva available daily 9am–6pm</span>
+    <span><i class="fas fa-book-open"></i>New UPSC & UP Police books arrived!</span>
+    <span><i class="fas fa-star"></i>Income & caste certificate — same day service</span>
+    <span><i class="fas fa-bullhorn"></i>PAN card apply karo — sirf ₹50 mein</span>
+    <span><i class="fas fa-book-open"></i>Class 10 & 12 UP Board books available</span>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">
+      <div class="nav-logo-icon"><i class="fas fa-om"></i></div>
+      <div class="nav-logo-text">
+        <div class="name">Guruji Jan Sewa Kendra</div>
+        <div class="sub">& Book Store — Lucknow</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#books">Books</a></li>
+      <li><a href="#notice">Notice</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" onclick="toggleMenu()">Home</a>
+    <a href="#services" onclick="toggleMenu()">Jan Sewa Services</a>
+    <a href="#books" onclick="toggleMenu()">Book Store</a>
+    <a href="#notice" onclick="toggleMenu()">Notice Board</a>
+    <a href="#about" onclick="toggleMenu()">About Us</a>
+    <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+    <a href="#contact" onclick="toggleMenu()">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="container">
+    <span class="hero-badge"><i class="fas fa-star"></i> Trusted Jan Sewa Centre — Lucknow</span>
+    <h1>Guruji <span>Jan Sewa Kendra</span><br>&amp; Book Store</h1>
+    <p class="hero-sub">Government Services • Certificates • Book Store — All Under One Roof</p>
+    <p class="hero-hindi">आपकी सेवा, हमारा संकल्प — हर सरकारी काम आसान</p>
+    <div class="hero-btns">
+      <a href="#services" class="btn btn-primary"><i class="fas fa-file-alt"></i> Jan Sewa Services</a>
+      <a href="#books" class="btn btn-secondary"><i class="fas fa-book"></i> Browse Books</a>
+      <a href="https://wa.me/919999999999" class="btn btn-outline"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">5000+</div><div class="lbl">Applications Processed</div></div>
+      <div class="hero-stat"><div class="num">500+</div><div class="lbl">Books in Store</div></div>
+      <div class="hero-stat"><div class="num">15+</div><div class="lbl">Government Services</div></div>
+      <div class="hero-stat"><div class="num">10 yrs</div><div class="lbl">Trusted Service</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- JAN SEWA SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow"><i class="fas fa-landmark"></i> Government Services</div>
+      <h2>Jan Sewa Kendra Services</h2>
+      <p>सभी सरकारी कागज़ात एक ही जगह पर — All official document services at one place</p>
+      <div class="section-divider"></div>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-id-card"></i></div>
+        <h3>Aadhaar Card</h3>
+        <p>New enrollment, update, correction & reprint</p>
+        <span class="service-fee">From ₹50</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-credit-card"></i></div>
+        <h3>PAN Card</h3>
+        <p>New PAN application & corrections</p>
+        <span class="service-fee">₹110</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-baby"></i></div>
+        <h3>Birth Certificate</h3>
+        <p>Apply & download birth certificate</p>
+        <span class="service-fee">₹60</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-file-certificate"></i></div>
+        <h3>Income Certificate</h3>
+        <p>Aay Praman Patra — same day processing</p>
+        <span class="service-fee">₹80</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-users"></i></div>
+        <h3>Caste Certificate</h3>
+        <p>Jati Praman Patra for SC/ST/OBC</p>
+        <span class="service-fee">₹80</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-home"></i></div>
+        <h3>Domicile Certificate</h3>
+        <p>Nivas Praman Patra — UP residence proof</p>
+        <span class="service-fee">₹80</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-wheat-awn"></i></div>
+        <h3>Ration Card</h3>
+        <p>New ration card apply & corrections</p>
+        <span class="service-fee">₹100</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-car"></i></div>
+        <h3>Driving Licence</h3>
+        <p>DL apply, renewal & related forms</p>
+        <span class="service-fee">₹150</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-passport"></i></div>
+        <h3>Passport Help</h3>
+        <p>Passport application form filling & guidance</p>
+        <span class="service-fee">₹200</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-bolt"></i></div>
+        <h3>Utility Bills</h3>
+        <p>Electricity, water & gas bill payment</p>
+        <span class="service-fee">₹20</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
+        <h3>Scholarship Forms</h3>
+        <p>UP scholarship apply & document upload</p>
+        <span class="service-fee">₹100</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-print"></i></div>
+        <h3>Print & Photocopy</h3>
+        <p>Black & white and colour printing</p>
+        <span class="service-fee">₹2/page</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK STORE -->
+<section id="books">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow"><i class="fas fa-book"></i> Book Store</div>
+      <h2>Our Book Collection</h2>
+      <p>School, competitive exams, religious & general books — enquire in store or on WhatsApp</p>
+      <div class="section-divider"></div>
+    </div>
+    <div class="book-cats">
+      <button class="cat-btn active" onclick="filterBooks('all', this)">All Books</button>
+      <button class="cat-btn" onclick="filterBooks('school', this)">School Books</button>
+      <button class="cat-btn" onclick="filterBooks('exam', this)">Competitive Exams</button>
+      <button class="cat-btn" onclick="filterBooks('religious', this)">Religious</button>
+      <button class="cat-btn" onclick="filterBooks('general', this)">General / Others</button>
+    </div>
+    <div class="books-grid" id="booksGrid"></div>
+  </div>
+</section>
+
+<!-- NOTICE BOARD -->
+<section id="notice">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow"><i class="fas fa-bell"></i> Updates</div>
+      <h2>Notice Board</h2>
+      <p>Latest updates, new services & important announcements</p>
+      <div class="section-divider"></div>
+    </div>
+    <div class="notice-board">
+      <div class="notice-header">
+        <i class="fas fa-thumbtack"></i>
+        <h3>Important Notices — Soochna Phalak</h3>
+      </div>
+      <div class="notice-item">
+        <span class="notice-date">May 2025</span>
+        <div class="notice-text"><strong>New UPSC 2025 books available</strong> — Laxmikant Polity, M Laxmikant Indian Polity 7th edition, & Geography NCERT sets now in stock.</div>
+      </div>
+      <div class="notice-item">
+        <span class="notice-date">May 2025</span>
+        <div class="notice-text"><strong>Aadhaar Update Camp:</strong> Aadhaar biometric update ab free mein — bring original documents, no appointment needed.</div>
+      </div>
+      <div class="notice-item">
+        <span class="notice-date">Apr 2025</span>
+        <div class="notice-text"><strong>UP Board Result 2025:</strong> Marksheet download & attestation seva uplabdh hai — sirf ₹30 mein.</div>
+      </div>
+      <div class="notice-item">
+        <span class="notice-date">Apr 2025</span>
+        <div class="notice-text"><strong>Scholarship Last Date:</strong> UP scholarship portal ka last date 30 April hai — abhi apply karein.</div>
+      </div>
+      <div class="notice-item">
+        <span class="notice-date">Mar 2025</span>
+        <div class="notice-text"><strong>Sunday timing change:</strong> Sunday ko kendra 10am–3pm khula rahega — please note karo.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-box">🏛️</div>
+      <div class="about-content">
+        <h2>About Guruji Jan Sewa Kendra</h2>
+        <p>We are a trusted government service centre and book store serving the people of Lucknow for over 10 years. Our mission is to make government paperwork simple, affordable, and accessible for everyone.</p>
+        <p class="about-hindi">"हम हर परिवार की सरकारी ज़रूरतें पूरी करने के लिए यहाँ हैं।"</p>
+        <ul class="about-points">
+          <li><i class="fas fa-check-circle"></i> Government-authorised Jan Sewa Kendra operator</li>
+          <li><i class="fas fa-check-circle"></i> 15+ document and certificate services under one roof</li>
+          <li><i class="fas fa-check-circle"></i> Large collection of school, exam & religious books</li>
+          <li><i class="fas fa-check-circle"></i> Hindi & English speaking staff — no confusion</li>
+          <li><i class="fas fa-check-circle"></i> Affordable fees — no hidden charges</li>
+          <li><i class="fas fa-check-circle"></i> Same-day processing for most certificates</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow"><i class="fas fa-images"></i> Gallery</div>
+      <h2>Our Centre</h2>
+      <p>A glimpse of our services and book store</p>
+      <div class="section-divider"></div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item g1">🏛️</div>
+      <div class="gallery-item g2">📚</div>
+      <div class="gallery-item g3">🖥️</div>
+      <div class="gallery-item g4">📋</div>
+      <div class="gallery-item g5">🙏</div>
+      <div class="gallery-item g6">📖</div>
+    </div>
+    <p style="text-align:center;margin-top:18px;font-size:13px;color:var(--text-light);">Replace these with your actual photos — add images here for better impression</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow"><i class="fas fa-map-marker-alt"></i> Find Us</div>
+      <h2>Contact & Location</h2>
+      <p>Visit us, call us, or message on WhatsApp — we are happy to help</p>
+      <div class="section-divider"></div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Get In Touch</h3>
+        <div class="contact-item">
+          <div class="contact-icon saffron"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="contact-item-text">
+            <div class="label">Address</div>
+            <div class="val">Guruji Jan Sewa Kendra, [Your Area], Lucknow, Uttar Pradesh</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon green"><i class="fas fa-phone-alt"></i></div>
+          <div class="contact-item-text">
+            <div class="label">Phone</div>
+            <div class="val"><a href="tel:+919999999999">+91 99999 99999</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon saffron"><i class="fab fa-whatsapp"></i></div>
+          <div class="contact-item-text">
+            <div class="label">WhatsApp</div>
+            <div class="val"><a href="https://wa.me/919999999999">+91 99999 99999</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon green"><i class="fas fa-envelope"></i></div>
+          <div class="contact-item-text">
+            <div class="label">Email</div>
+            <div class="val"><a href="mailto:info@gurujijansewa.in">info@gurujijansewa.in</a></div>
+          </div>
+        </div>
+        <div class="hours-box">
+          <h4><i class="fas fa-clock"></i> Working Hours</h4>
+          <div class="hours-row"><span>Monday – Friday</span><span class="open">9:00 AM – 6:00 PM</span></div>
+          <div class="hours-row"><span>Saturday</span><span class="open">9:00 AM – 5:00 PM</span></div>
+          <div class="hours-row"><span>Sunday</span><span class="open">10:00 AM – 3:00 PM</span></div>
+          <div class="hours-row"><span>Public Holidays</span><span class="closed">Closed</span></div>
+        </div>
+        <a href="https://wa.me/919999999999?text=Namaste%20Guruji%20Jan%20Sewa%20Kendra%2C%20mujhe%20help%20chahiye" class="whatsapp-btn">
+          <i class="fab fa-whatsapp" style="font-size:20px"></i> Chat on WhatsApp
+        </a>
+      </div>
+      <div>
+        <div class="map-placeholder">
+          <i class="fas fa-map-marked-alt"></i>
+          <span>Google Maps will show here</span>
+          <small style="color:var(--green);font-size:12px;">Add your Google Maps embed code here</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="name">🕉 Guruji Jan Sewa Kendra & Book Store</div>
+      <p style="margin-top:8px;">Serving the people of Lucknow with trusted government services and quality books since 2015. Aapki seva, hamara dharm.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Aadhaar Card</a></li>
+        <li><a href="#services">PAN Card</a></li>
+        <li><a href="#services">Income Certificate</a></li>
+        <li><a href="#services">Caste Certificate</a></li>
+        <li><a href="#services">Ration Card</a></li>
+        <li><a href="#services">Bill Payment</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#books">Book Store</a></li>
+        <li><a href="#notice">Notice Board</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Guruji Jan Sewa Kendra & Book Store, Lucknow. All rights reserved.</span>
+    <div class="footer-flag">
+      <div class="flag-stripe" style="background:#FF9933"></div>
+      <div class="flag-stripe" style="background:white"></div>
+      <div class="flag-stripe" style="background:#138808"></div>
+      <span style="font-size:11px;color:#666;">Made in India 🇮🇳</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const books = [
+  { title: "NCERT Mathematics Class 10", author: "NCERT", price: "₹85", cat: "school", bg: "#FFF3E0", badge: "", avail: "In Stock" },
+  { title: "NCERT Science Class 9", author: "NCERT", price: "₹80", cat: "school", bg: "#E8F5E9", badge: "new", avail: "In Stock" },
+  { title: "UP Board Hindi Gadya", author: "UP Board", price: "₹60", cat: "school", bg: "#E3F2FD", badge: "", avail: "In Stock" },
+  { title: "Laxmikant Polity", author: "M. Laxmikant", price: "₹650", cat: "exam", bg: "#FCE4EC", badge: "hot", avail: "In Stock" },
+  { title: "UP Police Constable Guide", author: "Arihant", price: "₹280", cat: "exam", bg: "#F3E5F5", badge: "new", avail: "In Stock" },
+  { title: "SSC CGL Complete Guide", author: "Kiran Prakashan", price: "₹450", cat: "exam", bg: "#FFF8E1", badge: "", avail: "In Stock" },
+  { title: "Ramcharitmanas", author: "Tulsidas", price: "₹120", cat: "religious", bg: "#FFF3E0", badge: "", avail: "In Stock" },
+  { title: "Bhagavad Gita (Hindi)", author: "Gita Press", price: "₹40", cat: "religious", bg: "#E8F5E9", badge: "", avail: "In Stock" },
+  { title: "Hanuman Chalisa", author: "Gita Press", price: "₹15", cat: "religious", bg: "#FCE4EC", badge: "", avail: "In Stock" },
+  { title: "English Grammar Guide", author: "Wren & Martin", price: "₹220", cat: "general", bg: "#E3F2FD", badge: "new", avail: "In Stock" },
+  { title: "General Knowledge 2025", author: "Manohar Pandey", price: "₹180", cat: "exam", bg: "#F3E5F5", badge: "hot", avail: "In Stock" },
+  { title: "Children's Story Book Set", author: "Various", price: "₹150", cat: "general", bg: "#FFF8E1", badge: "", avail: "In Stock" },
+];
+
+const emojis = { school:"📘", exam:"📕", religious:"📿", general:"📗" };
+
+function renderBooks(cat) {
+  const grid = document.getElementById('booksGrid');
+  const filtered = cat === 'all' ? books : books.filter(b => b.cat === cat);
+  grid.innerHTML = filtered.map(b => `
+    <div class="book-card">
+      <div class="book-cover" style="background:${b.bg}">
+        ${emojis[b.cat]}
+        ${b.badge === 'new' ? '<span class="book-badge badge-new">NEW</span>' : b.badge === 'hot' ? '<span class="book-badge badge-hot">HOT</span>' : ''}
+      </div>
+      <div class="book-info">
+        <h4>${b.title}</h4>
+        <div class="author">${b.author}</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span class="price">${b.price}</span>
+          <span class="avail">✓ ${b.avail}</span>
+        </div>
+        <button class="book-enquire" onclick="enquireBook('${b.title}')">
+          <i class="fab fa-whatsapp"></i> Enquire
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterBooks(cat, btn) {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderBooks(cat);
+}
+
+function enquireBook(title) {
+  const msg = encodeURIComponent(`Namaste! Mujhe "${title}" book chahiye. Kya available hai?`);
+  window.open(`https://wa.me/919999999999?text=${msg}`, '_blank');
+}
+
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+renderBooks('all');
+</script>
+</body>
+</html>
